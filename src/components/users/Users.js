@@ -1,9 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useContext } from 'react';
+import GithubContext from '../../context/github/githubContext';
+
 import UserItem from './UserItem';
 import Spinner from '../layout/Spinner';
 
-const Users = ({ users, loading }) => {
+const Users = () => {
+  const githubContext = useContext(GithubContext);
+  const { loading, users, getAllUsers } = githubContext;
+
+  useEffect(() => {
+    getAllUsers();
+    // eslint-disable-next-line
+  }, []);
+
   if (loading) {
     return <Spinner />;
   }
@@ -17,8 +26,4 @@ const Users = ({ users, loading }) => {
   );
 };
 
-Users.propTypes = {
-  users: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
-};
 export default Users;
