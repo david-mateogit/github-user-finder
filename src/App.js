@@ -4,12 +4,13 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import GithubState from './context/github/GihubState';
 import AlertState from './context/alert/AlertState';
 
-import Alert from './components/layout/Alert';
-import Search from './components/users/Search';
-import Users from './components/users/Users';
-import User from './components/users/User';
 import Layout from './components/layout/Layout';
+import Alert from './components/layout/Alert';
+import Home from './components/pages/Home';
 import About from './components/pages/About';
+import User from './components/users/User';
+import NotFound from './components/pages/NotFound';
+
 import './App.css';
 
 const App = () => {
@@ -20,20 +21,10 @@ const App = () => {
           <Layout>
             <Alert />
             <Switch>
-              <Route
-                exact
-                path="/"
-                render={props => {
-                  return (
-                    <>
-                      <Search />
-                      <Users />
-                    </>
-                  );
-                }}
-              />
+              <Route exact path="/" component={Home} />
               <Route exact path="/about" component={About} />
               <Route exact path="/user/:login" component={User} />
+              <Route component={NotFound} />
             </Switch>
           </Layout>
         </BrowserRouter>
